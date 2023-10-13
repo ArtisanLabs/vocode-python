@@ -1,0 +1,31 @@
+name: vocodeDev
+channels:
+  - conda-forge
+  - pytorch
+dependencies:
+  - python=3.10
+  # - openssl=1.1.1l
+  - portaudio
+  - ffmpeg
+  - imagemagick
+  - pip
+  - pip:
+    - langchain
+    - langchain_experimental
+    - python-dotenv
+    - ipython
+    - deepgram-sdk
+    - yt-dlp
+    - ipykernel
+    - pandas
+    - matplotlib
+    - git+https://github.com/m-bain/whisperx.git
+    - pysrt
+    - huggingface_hub
+    - sentence-transformers
+    - transformers
+    - datasets
+    - supabase
+    - tiktoken
+    - pinecone-client
+    

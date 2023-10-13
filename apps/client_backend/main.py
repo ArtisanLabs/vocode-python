@@ -9,11 +9,16 @@ from vocode.streaming.agent.chat_gpt_agent import ChatGPTAgent
 from vocode.streaming.client_backend.conversation import ConversationRouter
 from vocode.streaming.models.message import BaseMessage
 
+from vocode.streaming.vector_db.factory import VectorDBFactory
+from vocode.streaming.vector_db.pinecone import PineconeConfig
+
 from dotenv import load_dotenv
 
 load_dotenv()
 
 app = FastAPI(docs_url=None)
+
+vector_db_config=PineconeConfig(index="artisan")
 
 logging.basicConfig()
 logger = logging.getLogger(__name__)
@@ -24,6 +29,7 @@ conversation_router = ConversationRouter(
         ChatGPTAgentConfig(
             initial_message=BaseMessage(text="Hello!"),
             prompt_preamble="Have a pleasant conversation about life",
+            vector_db_factory=VectorDBFactory(),
         )
     ),
     synthesizer_thunk=lambda output_audio_config: AzureSynthesizer(
