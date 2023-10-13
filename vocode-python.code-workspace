@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"python.pythonPath": "/opt/arpagon/mambaforge/envs/vocodeDev/bin/python"
+	}
+}

@@ -28,4 +28,5 @@ dependencies:
     - supabase
     - tiktoken
     - pinecone-client
+    - poetry
     
