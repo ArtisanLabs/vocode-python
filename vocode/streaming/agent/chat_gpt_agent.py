@@ -158,6 +158,8 @@ class ChatGPTAgent(RespondAgent[ChatGPTAgentConfig]):
                         for doc in docs_with_scores
                     ]
                 )
+                # log docs_with_scores_str
+                self.logger.debug(docs_with_scores_str)
                 vector_db_result = f"Found {len(docs_with_scores)} similar documents:\n{docs_with_scores_str}"
                 messages = format_openai_chat_messages_from_transcript(
                     self.transcript, self.agent_config.prompt_preamble
