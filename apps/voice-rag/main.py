@@ -9,8 +9,8 @@ from vocode.streaming.synthesizer.azure_synthesizer import AzureSynthesizer
 from vocode.streaming.agent.chat_gpt_agent import ChatGPTAgent
 from vocode.streaming.client_backend.conversation import ConversationRouter
 from vocode.streaming.models.message import BaseMessage
-from vocode.streaming.vector_db.factory import VectorDBFactory
 from vocode.streaming.vector_db.pinecone import PineconeConfig
+from vocode.streaming.vector_db.supabase import SupabaseConfig
 from vocode.streaming.transcriber.deepgram_transcriber import DeepgramTranscriber
 
 
@@ -29,9 +29,13 @@ logging.basicConfig()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
-vector_db_config = PineconeConfig(
-    index=os.getenv('PINECONE_INDEX_NAME')
+vector_db_config = SupabaseConfig(
+    supbase_url=os.getenv("SUPABASE_URL"),
+    supbase_key=os.getenv("SUPABASE_KEY"),
+    table_name="documents",
+    query_name="match_documents",
 )
+
 
 INITIAL_MESSAGE="Hello!"
 PROMPT_PREAMBLE='''
