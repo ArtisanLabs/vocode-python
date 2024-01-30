@@ -16,7 +16,7 @@ from vocode.streaming.transcriber.deepgram_transcriber import DeepgramTranscribe
 
 from vocode.streaming.models.transcriber import (
     DeepgramTranscriberConfig,
-    TimeEndpointingConfig
+    TimeEndpointingConfig,
 )
 
 from dotenv import load_dotenv
@@ -29,12 +29,10 @@ logging.basicConfig()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
-vector_db_config = PineconeConfig(
-    index=os.getenv('PINECONE_INDEX_NAME')
-)
+vector_db_config = PineconeConfig(index=os.getenv("PINECONE_INDEX_NAME"))
 
-INITIAL_MESSAGE="Hello!"
-PROMPT_PREAMBLE='''
+INITIAL_MESSAGE = "Hello!"
+PROMPT_PREAMBLE = """
 I want you to act as an IT Architect. 
 I will provide some details about the functionality of an application or other 
 digital product, and it will be your job to come up with ways to integrate it 
@@ -48,14 +46,16 @@ You are an expert in these technologies:
 - Next.js
 - Fastapi
 - Vocode.
-'''
+"""
 
 TIME_ENDPOINTING_CONFIG = TimeEndpointingConfig()
 TIME_ENDPOINTING_CONFIG.time_cutoff_seconds = 2
 
 AZURE_SYNTHESIZER_THUNK = lambda output_audio_config: AzureSynthesizer(
-  AzureSynthesizerConfig.from_output_audio_config(output_audio_config, ),
-  logger=logger
+    AzureSynthesizerConfig.from_output_audio_config(
+        output_audio_config,
+    ),
+    logger=logger,
 )
 
 DEEPGRAM_TRANSCRIBER_THUNK = lambda input_audio_config: DeepgramTranscriber(
@@ -64,7 +64,7 @@ DEEPGRAM_TRANSCRIBER_THUNK = lambda input_audio_config: DeepgramTranscriber(
         endpointing_config=TIME_ENDPOINTING_CONFIG,
         min_interrupt_confidence=0.9,
     ),
-    logger=logger
+    logger=logger,
 )
 
 conversation_router = ConversationRouter(
@@ -75,7 +75,7 @@ conversation_router = ConversationRouter(
             vector_db_config=vector_db_config,
             logger=logger,
         ),
-        logger=logger
+        logger=logger,
     ),
     synthesizer_thunk=AZURE_SYNTHESIZER_THUNK,
     transcriber_thunk=DEEPGRAM_TRANSCRIBER_THUNK,
