@@ -95,3 +95,15 @@ class AzureSynthesizer(BaseSynthesizer):
             )
         else:
             raise Exception("Could not synthesize audio")
+
+    async def async_synthesize(self, text) -> AudioSegment:
+        result = await self.synthesizer.speak_text_async(self.create_ssml(text))
+        if result.reason == self.speechsdk.ResultReason.SynthesizingAudioCompleted:
+            return AudioSegment(
+                result.audio_data,
+                sample_width=2,
+                frame_rate=self.sampling_rate,
+                channels=1,
+            )
+        else:
+            raise Exception("Could not synthesize audio")
