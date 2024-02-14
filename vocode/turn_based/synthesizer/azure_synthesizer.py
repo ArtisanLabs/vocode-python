@@ -1,8 +1,8 @@
 from typing import Optional
 from xml.etree import ElementTree
 from pydub import AudioSegment
-from regex import D
 from vocode import getenv
+import logging
 
 from vocode.turn_based.synthesizer.base_synthesizer import BaseSynthesizer
 
@@ -29,40 +29,35 @@ class AzureSynthesizer(BaseSynthesizer):
         rate: int = DEFAULT_RATE,
         api_key: Optional[str] = None,
         region: Optional[str] = None,
+        logger: Optional[logging.Logger] = None,
     ):
         import azure.cognitiveservices.speech as speechsdk
 
         self.speechsdk = speechsdk
+        self.logger = logger or logging.getLogger(__name__)
 
         self.sampling_rate = sampling_rate
         speech_config = self.speechsdk.SpeechConfig(
             subscription=getenv("AZURE_SPEECH_KEY", api_key),
             region=getenv("AZURE_SPEECH_REGION", region),
         )
-        if self.sampling_rate == 44100:
-            speech_config.set_speech_synthesis_output_format(
-                self.speechsdk.SpeechSynthesisOutputFormat.Raw44100Hz16BitMonoPcm
-            )
-        if self.sampling_rate == 48000:
-            speech_config.set_speech_synthesis_output_format(
-                self.speechsdk.SpeechSynthesisOutputFormat.Raw48Khz16BitMonoPcm
-            )
-        if self.sampling_rate == 24000:
-            speech_config.set_speech_synthesis_output_format(
-                self.speechsdk.SpeechSynthesisOutputFormat.Raw24Khz16BitMonoPcm
-            )
-        if self.sampling_rate == 22050:
-            speech_config.set_speech_synthesis_output_format(
-                self.speechsdk.SpeechSynthesisOutputFormat.Raw22050Hz16BitMonoPcm
-            )
-        elif self.sampling_rate == 16000:
-            speech_config.set_speech_synthesis_output_format(
-                self.speechsdk.SpeechSynthesisOutputFormat.Raw16Khz16BitMonoPcm
-            )
-        elif self.sampling_rate == 8000:
-            speech_config.set_speech_synthesis_output_format(
-                self.speechsdk.SpeechSynthesisOutputFormat.Raw8Khz16BitMonoPcm
-            )
+        # Logging the sampling rate
+        self.logger.info(f"Setting sampling rate to {self.sampling_rate}")
+
+        # Setting the output format based on the sampling rate
+        output_format = {
+            44100: self.speechsdk.SpeechSynthesisOutputFormat.Raw44100Hz16BitMonoPcm,
+            48000: self.speechsdk.SpeechSynthesisOutputFormat.Raw48Khz16BitMonoPcm,
+            24000: self.speechsdk.SpeechSynthesisOutputFormat.Raw24Khz16BitMonoPcm,
+            22050: self.speechsdk.SpeechSynthesisOutputFormat.Raw22050Hz16BitMonoPcm,
+            16000: self.speechsdk.SpeechSynthesisOutputFormat.Raw16Khz16BitMonoPcm,
+            8000: self.speechsdk.SpeechSynthesisOutputFormat.Raw8Khz16BitMonoPcm,
+        }.get(self.sampling_rate)
+
+        if output_format:
+            speech_config.set_speech_synthesis_output_format(output_format)
+        else:
+            self.logger.error(f"Invalid sampling rate: {self.sampling_rate}")
 
         self.synthesizer = self.speechsdk.SpeechSynthesizer(
             speech_config=speech_config, audio_config=None
@@ -87,23 +82,26 @@ class AzureSynthesizer(BaseSynthesizer):
     def synthesize(self, text) -> AudioSegment:
         result = self.synthesizer.speak_ssml(self.create_ssml(text))
         if result.reason == self.speechsdk.ResultReason.SynthesizingAudioCompleted:
+            self.logger.info("SynthesizingAudioCompleted result")
             return AudioSegment(
                 result.audio_data,
                 sample_width=2,
                 frame_rate=self.sampling_rate,
                 channels=1,
             )
-        else:
-            raise Exception("Could not synthesize audio")
-
-    async def async_synthesize(self, text) -> AudioSegment:
-        result = await self.synthesizer.speak_text_async(self.create_ssml(text))
-        if result.reason == self.speechsdk.ResultReason.SynthesizingAudioCompleted:
-            return AudioSegment(
-                result.audio_data,
-                sample_width=2,
-                frame_rate=self.sampling_rate,
-                channels=1,
+        elif result.reason == self.speechsdk.ResultReason.Canceled:
+            cancellation_details = result.cancellation_details
+            self.logger.warning(
+                f"Speech synthesis canceled: {cancellation_details.reason}"
             )
+            if cancellation_details.reason == self.speechsdk.CancellationReason.Error:
+                if cancellation_details.error_details:
+                    self.logger.error(
+                        f"Error details: {cancellation_details.error_details}"
+                    )
+                    self.logger.error(
+                        "Did you set the speech resource key and region values?"
+                    )
         else:
+            self.logger.error("Could not synthesize audio")
             raise Exception("Could not synthesize audio")
