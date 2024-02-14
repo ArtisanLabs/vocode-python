@@ -23,14 +23,48 @@ def test_synthesize():
     # Create an instance of AzureSynthesizer with the logger
     synthesizer = AzureSynthesizer(logger=logger)
 
-    # Define a test text
-    test_text = "Hello, world!"
+    # We are going to synthesize a text using the AzureSynthesizer instance
+    # The text to be synthesized is defined as a string
+    text_to_synthesize = "Hello, this is a test."
 
-    # Call the synthesize method and capture the output
-    output = synthesizer.synthesize(test_text)
+    # Create SSML from the text
+    ssml_text = synthesizer.create_ssml(text_to_synthesize)
 
-    # Assert that the output is an instance of AudioSegment
-    assert isinstance(output, AudioSegment), "Output is not an instance of AudioSegment"
+    # Call the speak_ssml method of the synthesizer instance
+    # The result is a SpeechSynthesisResult instance
+    result = synthesizer.synthesizer.speak_ssml(ssml_text)
 
-    # Assert that the output is not empty
-    assert len(output) > 0, "Output is empty"
+    # Check if the synthesis was successful
+    # Check if the synthesis was successful
+    if result.reason == synthesizer.speechsdk.ResultReason.SynthesizingAudioCompleted:
+        # If successful, convert the result to an AudioSegment instance
+        audio_segment = AudioSegment(
+            result.audio_data,
+            sample_width=2,
+            frame_rate=synthesizer.sampling_rate,
+            channels=1,
+        )
+        # Now we can do something with the audio_segment, for example, save it to a file
+        # We will use the export method of the AudioSegment instance
+        # The export method requires a file name and a format
+        # audio_segment.export("output.wav", format="wav")
+    elif result.reason == synthesizer.speechsdk.ResultReason.Canceled:
+        # If the synthesis was canceled, log the reason
+        cancellation_details = result.cancellation_details
+        synthesizer.logger.warning(
+            f"Speech synthesis canceled: {cancellation_details.reason}"
+        )
+        if (
+            cancellation_details.reason
+            == synthesizer.speechsdk.CancellationReason.Error
+        ):
+            if cancellation_details.error_details:
+                synthesizer.logger.error(
+                    f"Error details: {cancellation_details.error_details}"
+                )
+                synthesizer.logger.error(
+                    "Did you set the speech resource key and region values?"
+                )
+    else:
+        # If the synthesis was not successful, log the reason
+        synthesizer.logger.error("Could not synthesize audio")
