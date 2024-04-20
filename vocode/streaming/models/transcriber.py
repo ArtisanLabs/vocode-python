@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import List, Optional
 
-from pydantic import validator
+from pydantic.v1 import validator
 
 from vocode.streaming.input_device.base_input_device import BaseInputDevice
 from vocode.streaming.models.client_backend import InputAudioConfig
@@ -130,6 +130,7 @@ class AssemblyAITranscriberConfig(
 ):
     buffer_size_seconds: float = 0.1
     word_boost: Optional[List[str]] = None
+    end_utterance_silence_threshold_milliseconds: Optional[int] = None
 
 
 class WhisperCPPTranscriberConfig(

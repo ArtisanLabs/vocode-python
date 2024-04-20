@@ -32,6 +32,22 @@
             "schema": { "type": "integer", "title": "Size", "default": 10 },
             "name": "size",
             "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Sort Column" },
+            "name": "sort_column",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "title": "Sort Desc",
+              "default": false
+            },
+            "name": "sort_desc",
+            "in": "query"
           }
         ],
         "responses": {
@@ -257,6 +273,22 @@
             "schema": { "type": "integer", "title": "Size", "default": 10 },
             "name": "size",
             "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Sort Column" },
+            "name": "sort_column",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "title": "Sort Desc",
+              "default": false
+            },
+            "name": "sort_desc",
+            "in": "query"
           }
         ],
         "responses": {
@@ -481,6 +513,22 @@
             "schema": { "type": "integer", "title": "Size", "default": 10 },
             "name": "size",
             "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Sort Column" },
+            "name": "sort_column",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "title": "Sort Desc",
+              "default": false
+            },
+            "name": "sort_desc",
+            "in": "query"
           }
         ],
         "responses": {
@@ -633,6 +681,22 @@
             "schema": { "type": "integer", "title": "Size", "default": 10 },
             "name": "size",
             "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Sort Column" },
+            "name": "sort_column",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "title": "Sort Desc",
+              "default": false
+            },
+            "name": "sort_desc",
+            "in": "query"
           }
         ],
         "responses": {
@@ -782,6 +846,22 @@
             "required": false,
             "schema": { "type": "integer", "title": "Size", "default": 10 },
             "name": "size",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Sort Column" },
+            "name": "sort_column",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "title": "Sort Desc",
+              "default": false
+            },
+            "name": "sort_desc",
             "in": "query"
           }
         ],
@@ -935,6 +1015,22 @@
             "schema": { "type": "integer", "title": "Size", "default": 10 },
             "name": "size",
             "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Sort Column" },
+            "name": "sort_column",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "title": "Sort Desc",
+              "default": false
+            },
+            "name": "sort_desc",
+            "in": "query"
           }
         ],
         "responses": {
@@ -1084,6 +1180,22 @@
             "required": false,
             "schema": { "type": "integer", "title": "Size", "default": 10 },
             "name": "size",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Sort Column" },
+            "name": "sort_column",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "title": "Sort Desc",
+              "default": false
+            },
+            "name": "sort_desc",
             "in": "query"
           }
         ],
@@ -1236,6 +1348,22 @@
             "required": false,
             "schema": { "type": "integer", "title": "Size", "default": 10 },
             "name": "size",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Sort Column" },
+            "name": "sort_column",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "title": "Sort Desc",
+              "default": false
+            },
+            "name": "sort_desc",
             "in": "query"
           }
         ],
@@ -1397,6 +1525,22 @@
             "schema": { "type": "integer", "title": "Size", "default": 10 },
             "name": "size",
             "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Sort Column" },
+            "name": "sort_column",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "title": "Sort Desc",
+              "default": false
+            },
+            "name": "sort_desc",
+            "in": "query"
           }
         ],
         "responses": {
@@ -1505,6 +1649,46 @@
         },
         "security": [{ "HTTPBearer": [] }]
       }
+    },
+    "/v1/account_connections/add_to_steering_pool": {
+      "post": {
+        "tags": ["account_connections"],
+        "summary": "Add To Steering Pool",
+        "operationId": "add_to_steering_pool",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "format": "uuid", "title": "Id" },
+            "name": "id",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddToSteeringPoolRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        },
+        "security": [{ "HTTPBearer": [] }]
+      }
     }
   },
   "components": {
@@ -1587,14 +1771,20 @@
               "oneOf": [
                 { "$ref": "#/components/schemas/TransferCallAction" },
                 { "$ref": "#/components/schemas/EndConversationAction" },
-                { "$ref": "#/components/schemas/DTMFAction" }
+                { "$ref": "#/components/schemas/DTMFAction" },
+                { "$ref": "#/components/schemas/AddToConferenceAction" },
+                { "$ref": "#/components/schemas/SetHoldAction" },
+                { "$ref": "#/components/schemas/ExternalAction" }
               ],
               "discriminator": {
                 "propertyName": "type",
                 "mapping": {
                   "action_transfer_call": "#/components/schemas/TransferCallAction",
                   "action_end_conversation": "#/components/schemas/EndConversationAction",
-                  "action_dtmf": "#/components/schemas/DTMFAction"
+                  "action_dtmf": "#/components/schemas/DTMFAction",
+                  "action_add_to_conference": "#/components/schemas/AddToConferenceAction",
+                  "action_set_hold": "#/components/schemas/SetHoldAction",
+                  "action_external": "#/components/schemas/ExternalAction"
                 }
               }
             },
@@ -1613,7 +1803,10 @@
         "oneOf": [
           { "$ref": "#/components/schemas/TransferCallActionParams" },
           { "$ref": "#/components/schemas/EndConversationActionParams" },
-          { "$ref": "#/components/schemas/DTMFActionParams" }
+          { "$ref": "#/components/schemas/DTMFActionParams" },
+          { "$ref": "#/components/schemas/AddToConferenceActionParams" },
+          { "$ref": "#/components/schemas/SetHoldActionParams" },
+          { "$ref": "#/components/schemas/ExternalActionParams" }
         ],
         "title": "ActionParamsRequest",
         "discriminator": {
@@ -1621,7 +1814,10 @@
           "mapping": {
             "action_transfer_call": "#/components/schemas/TransferCallActionParams",
             "action_end_conversation": "#/components/schemas/EndConversationActionParams",
-            "action_dtmf": "#/components/schemas/DTMFActionParams"
+            "action_dtmf": "#/components/schemas/DTMFActionParams",
+            "action_add_to_conference": "#/components/schemas/AddToConferenceActionParams",
+            "action_set_hold": "#/components/schemas/SetHoldActionParams",
+            "action_external": "#/components/schemas/ExternalActionParams"
           }
         }
       },
@@ -1629,7 +1825,10 @@
         "oneOf": [
           { "$ref": "#/components/schemas/TransferCallAction" },
           { "$ref": "#/components/schemas/EndConversationAction" },
-          { "$ref": "#/components/schemas/DTMFAction" }
+          { "$ref": "#/components/schemas/DTMFAction" },
+          { "$ref": "#/components/schemas/AddToConferenceAction" },
+          { "$ref": "#/components/schemas/SetHoldAction" },
+          { "$ref": "#/components/schemas/ExternalAction" }
         ],
         "title": "ActionResponseModel",
         "discriminator": {
@@ -1637,7 +1836,10 @@
           "mapping": {
             "action_transfer_call": "#/components/schemas/TransferCallAction",
             "action_end_conversation": "#/components/schemas/EndConversationAction",
-            "action_dtmf": "#/components/schemas/DTMFAction"
+            "action_dtmf": "#/components/schemas/DTMFAction",
+            "action_add_to_conference": "#/components/schemas/AddToConferenceAction",
+            "action_set_hold": "#/components/schemas/SetHoldAction",
+            "action_external": "#/components/schemas/ExternalAction"
           }
         }
       },
@@ -1645,7 +1847,10 @@
         "oneOf": [
           { "$ref": "#/components/schemas/TransferCallActionUpdateParams" },
           { "$ref": "#/components/schemas/EndConversationActionUpdateParams" },
-          { "$ref": "#/components/schemas/DTMFActionUpdateParams" }
+          { "$ref": "#/components/schemas/DTMFActionUpdateParams" },
+          { "$ref": "#/components/schemas/AddToConferenceActionUpdateParams" },
+          { "$ref": "#/components/schemas/SetHoldActionUpdateParams" },
+          { "$ref": "#/components/schemas/ExternalActionUpdateParams" }
         ],
         "title": "ActionUpdateParamsRequest",
         "discriminator": {
@@ -1653,14 +1858,128 @@
           "mapping": {
             "action_transfer_call": "#/components/schemas/TransferCallActionUpdateParams",
             "action_end_conversation": "#/components/schemas/EndConversationActionUpdateParams",
-            "action_dtmf": "#/components/schemas/DTMFActionUpdateParams"
+            "action_dtmf": "#/components/schemas/DTMFActionUpdateParams",
+            "action_add_to_conference": "#/components/schemas/AddToConferenceActionUpdateParams",
+            "action_set_hold": "#/components/schemas/SetHoldActionUpdateParams",
+            "action_external": "#/components/schemas/ExternalActionUpdateParams"
           }
         }
+      },
+      "AddToConferenceAction": {
+        "properties": {
+          "id": { "type": "string", "format": "uuid", "title": "Id" },
+          "user_id": { "type": "string", "format": "uuid", "title": "User Id" },
+          "type": {
+            "type": "string",
+            "enum": ["action_add_to_conference"],
+            "title": "Type"
+          },
+          "config": { "$ref": "#/components/schemas/AddToConferenceConfig" },
+          "action_trigger": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/FunctionCallActionTrigger" },
+              { "$ref": "#/components/schemas/PhraseBasedActionTrigger" }
+            ],
+            "title": "Action Trigger",
+            "default": { "type": "action_trigger_function_call", "config": {} },
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "action_trigger_function_call": "#/components/schemas/FunctionCallActionTrigger",
+                "action_trigger_phrase_based": "#/components/schemas/PhraseBasedActionTrigger"
+              }
+            }
+          }
+        },
+        "type": "object",
+        "required": ["id", "user_id", "type", "config"],
+        "title": "AddToConferenceAction"
+      },
+      "AddToConferenceActionParams": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["action_add_to_conference"],
+            "title": "Type"
+          },
+          "config": { "$ref": "#/components/schemas/AddToConferenceConfig" },
+          "action_trigger": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/FunctionCallActionTrigger" },
+              { "$ref": "#/components/schemas/PhraseBasedActionTrigger" }
+            ],
+            "title": "Action Trigger",
+            "default": { "type": "action_trigger_function_call", "config": {} },
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "action_trigger_function_call": "#/components/schemas/FunctionCallActionTrigger",
+                "action_trigger_phrase_based": "#/components/schemas/PhraseBasedActionTrigger"
+              }
+            }
+          }
+        },
+        "type": "object",
+        "required": ["type", "config"],
+        "title": "AddToConferenceActionParams"
+      },
+      "AddToConferenceActionUpdateParams": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["action_add_to_conference"],
+            "title": "Type"
+          },
+          "config": {
+            "anyOf": [
+              { "$ref": "#/components/schemas/AddToConferenceConfig" },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Config"
+          },
+          "action_trigger": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  { "$ref": "#/components/schemas/FunctionCallActionTrigger" },
+                  { "$ref": "#/components/schemas/PhraseBasedActionTrigger" }
+                ]
+              },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Action Trigger",
+            "default": {}
+          }
+        },
+        "type": "object",
+        "required": ["type"],
+        "title": "AddToConferenceActionUpdateParams"
+      },
+      "AddToConferenceConfig": {
+        "properties": {
+          "phone_number": { "type": "string", "title": "Phone Number" },
+          "place_primary_on_hold": {
+            "type": "boolean",
+            "title": "Place Primary On Hold",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": ["phone_number"],
+        "title": "AddToConferenceConfig"
+      },
+      "AddToSteeringPoolRequest": {
+        "properties": {
+          "phone_number": { "type": "string", "title": "Phone Number" }
+        },
+        "type": "object",
+        "title": "AddToSteeringPoolRequest"
       },
       "Agent": {
         "properties": {
           "id": { "type": "string", "format": "uuid", "title": "Id" },
           "user_id": { "type": "string", "format": "uuid", "title": "User Id" },
+          "name": { "type": "string", "title": "Name" },
           "prompt": { "$ref": "#/components/schemas/Prompt" },
           "language": {
             "allOf": [{ "$ref": "#/components/schemas/Language" }],
@@ -1671,14 +1990,20 @@
               "oneOf": [
                 { "$ref": "#/components/schemas/TransferCallAction" },
                 { "$ref": "#/components/schemas/EndConversationAction" },
-                { "$ref": "#/components/schemas/DTMFAction" }
+                { "$ref": "#/components/schemas/DTMFAction" },
+                { "$ref": "#/components/schemas/AddToConferenceAction" },
+                { "$ref": "#/components/schemas/SetHoldAction" },
+                { "$ref": "#/components/schemas/ExternalAction" }
               ],
               "discriminator": {
                 "propertyName": "type",
                 "mapping": {
                   "action_transfer_call": "#/components/schemas/TransferCallAction",
                   "action_end_conversation": "#/components/schemas/EndConversationAction",
-                  "action_dtmf": "#/components/schemas/DTMFAction"
+                  "action_dtmf": "#/components/schemas/DTMFAction",
+                  "action_add_to_conference": "#/components/schemas/AddToConferenceAction",
+                  "action_set_hold": "#/components/schemas/SetHoldAction",
+                  "action_external": "#/components/schemas/ExternalAction"
                 }
               }
             },
@@ -1756,6 +2081,11 @@
             "type": "boolean",
             "title": "Run Do Not Call Detection",
             "default": false
+          },
+          "llm_temperature": {
+            "type": "number",
+            "title": "Llm Temperature",
+            "default": 0.0
           }
         },
         "type": "object",
@@ -1779,6 +2109,7 @@
       },
       "AgentParams": {
         "properties": {
+          "name": { "type": "string", "title": "Name" },
           "prompt": {
             "anyOf": [
               { "type": "string", "format": "uuid" },
@@ -1800,7 +2131,12 @@
                     {
                       "$ref": "#/components/schemas/EndConversationActionParams"
                     },
-                    { "$ref": "#/components/schemas/DTMFActionParams" }
+                    { "$ref": "#/components/schemas/DTMFActionParams" },
+                    {
+                      "$ref": "#/components/schemas/AddToConferenceActionParams"
+                    },
+                    { "$ref": "#/components/schemas/SetHoldActionParams" },
+                    { "$ref": "#/components/schemas/ExternalActionParams" }
                   ]
                 }
               ]
@@ -1890,6 +2226,11 @@
             "type": "boolean",
             "title": "Run Do Not Call Detection",
             "default": false
+          },
+          "llm_temperature": {
+            "type": "number",
+            "title": "Llm Temperature",
+            "default": 0.0
           }
         },
         "type": "object",
@@ -1898,6 +2239,13 @@
       },
       "AgentUpdateParams": {
         "properties": {
+          "name": {
+            "anyOf": [
+              { "type": "string" },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Name"
+          },
           "prompt": {
             "anyOf": [
               { "type": "string", "format": "uuid" },
@@ -1929,6 +2277,15 @@
                         },
                         {
                           "$ref": "#/components/schemas/DTMFActionUpdateParams"
+                        },
+                        {
+                          "$ref": "#/components/schemas/AddToConferenceActionUpdateParams"
+                        },
+                        {
+                          "$ref": "#/components/schemas/SetHoldActionUpdateParams"
+                        },
+                        {
+                          "$ref": "#/components/schemas/ExternalActionUpdateParams"
                         }
                       ]
                     }
@@ -2172,6 +2529,28 @@
             "title": "Do Not Call Result"
           },
           "telephony_id": { "type": "string", "title": "Telephony Id" },
+          "stage": {
+            "type": "string",
+            "enum": [
+              "created",
+              "picked_up",
+              "transfer_started",
+              "transfer_successful"
+            ],
+            "title": "Stage"
+          },
+          "stage_outcome": {
+            "type": "string",
+            "enum": [
+              "human_unanswered",
+              "call_did_not_connect",
+              "human_disconnected",
+              "bot_disconnected",
+              "transfer_unanswered",
+              "transfer_disconnected"
+            ],
+            "title": "Stage Outcome"
+          },
           "to_number": { "type": "string", "title": "To Number" },
           "from_number": { "type": "string", "title": "From Number" },
           "agent": { "$ref": "#/components/schemas/Agent" },
@@ -2215,6 +2594,11 @@
           },
           "telephony_account_connection": {
             "$ref": "#/components/schemas/TwilioAccountConnection"
+          },
+          "telephony_params": {
+            "additionalProperties": { "type": "string" },
+            "type": "object",
+            "title": "Telephony Params"
           }
         },
         "type": "object",
@@ -2267,6 +2651,7 @@
       },
       "CreateCallAgentParams": {
         "properties": {
+          "name": { "type": "string", "title": "Name" },
           "prompt": {
             "anyOf": [
               { "type": "string", "format": "uuid" },
@@ -2288,7 +2673,12 @@
                     {
                       "$ref": "#/components/schemas/EndConversationActionParams"
                     },
-                    { "$ref": "#/components/schemas/DTMFActionParams" }
+                    { "$ref": "#/components/schemas/DTMFActionParams" },
+                    {
+                      "$ref": "#/components/schemas/AddToConferenceActionParams"
+                    },
+                    { "$ref": "#/components/schemas/SetHoldActionParams" },
+                    { "$ref": "#/components/schemas/ExternalActionParams" }
                   ]
                 }
               ]
@@ -2378,6 +2768,11 @@
             "type": "boolean",
             "title": "Run Do Not Call Detection",
             "default": false
+          },
+          "llm_temperature": {
+            "type": "number",
+            "title": "Llm Temperature",
+            "default": 0.0
           }
         },
         "type": "object",
@@ -2414,6 +2809,11 @@
             "additionalProperties": { "type": "string" },
             "type": "object",
             "title": "Context"
+          },
+          "telephony_params": {
+            "additionalProperties": { "type": "string" },
+            "type": "object",
+            "title": "Telephony Params"
           }
         },
         "type": "object",
@@ -2429,7 +2829,22 @@
             "enum": ["action_dtmf"],
             "title": "Type"
           },
-          "config": { "$ref": "#/components/schemas/EmptyActionConfig" }
+          "config": { "$ref": "#/components/schemas/EmptyActionConfig" },
+          "action_trigger": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/FunctionCallActionTrigger" },
+              { "$ref": "#/components/schemas/PhraseBasedActionTrigger" }
+            ],
+            "title": "Action Trigger",
+            "default": { "type": "action_trigger_function_call", "config": {} },
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "action_trigger_function_call": "#/components/schemas/FunctionCallActionTrigger",
+                "action_trigger_phrase_based": "#/components/schemas/PhraseBasedActionTrigger"
+              }
+            }
+          }
         },
         "type": "object",
         "required": ["id", "user_id", "type"],
@@ -2442,7 +2857,22 @@
             "enum": ["action_dtmf"],
             "title": "Type"
           },
-          "config": { "$ref": "#/components/schemas/EmptyActionConfig" }
+          "config": { "$ref": "#/components/schemas/EmptyActionConfig" },
+          "action_trigger": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/FunctionCallActionTrigger" },
+              { "$ref": "#/components/schemas/PhraseBasedActionTrigger" }
+            ],
+            "title": "Action Trigger",
+            "default": { "type": "action_trigger_function_call", "config": {} },
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "action_trigger_function_call": "#/components/schemas/FunctionCallActionTrigger",
+                "action_trigger_phrase_based": "#/components/schemas/PhraseBasedActionTrigger"
+              }
+            }
+          }
         },
         "type": "object",
         "required": ["type"],
@@ -2461,6 +2891,19 @@
               { "$ref": "#/components/schemas/Undefined" }
             ],
             "title": "Config"
+          },
+          "action_trigger": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  { "$ref": "#/components/schemas/FunctionCallActionTrigger" },
+                  { "$ref": "#/components/schemas/PhraseBasedActionTrigger" }
+                ]
+              },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Action Trigger",
+            "default": {}
           }
         },
         "type": "object",
@@ -2484,7 +2927,12 @@
             "type": "integer",
             "title": "Optimize Streaming Latency"
           },
-          "model_id": { "type": "string", "title": "Model Id" }
+          "model_id": { "type": "string", "title": "Model Id" },
+          "experimental_input_streaming": {
+            "type": "boolean",
+            "title": "Experimental Input Streaming",
+            "default": false
+          }
         },
         "type": "object",
         "required": ["id", "user_id", "type", "voice_id"],
@@ -2505,7 +2953,12 @@
             "type": "integer",
             "title": "Optimize Streaming Latency"
           },
-          "model_id": { "type": "string", "title": "Model Id" }
+          "model_id": { "type": "string", "title": "Model Id" },
+          "experimental_input_streaming": {
+            "type": "boolean",
+            "title": "Experimental Input Streaming",
+            "default": false
+          }
         },
         "type": "object",
         "required": ["type", "voice_id"],
@@ -2559,6 +3012,13 @@
               { "$ref": "#/components/schemas/Undefined" }
             ],
             "title": "Model Id"
+          },
+          "experimental_input_streaming": {
+            "anyOf": [
+              { "type": "boolean" },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Experimental Input Streaming"
           }
         },
         "type": "object",
@@ -2579,7 +3039,22 @@
             "enum": ["action_end_conversation"],
             "title": "Type"
           },
-          "config": { "$ref": "#/components/schemas/EmptyActionConfig" }
+          "config": { "$ref": "#/components/schemas/EmptyActionConfig" },
+          "action_trigger": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/FunctionCallActionTrigger" },
+              { "$ref": "#/components/schemas/PhraseBasedActionTrigger" }
+            ],
+            "title": "Action Trigger",
+            "default": { "type": "action_trigger_function_call", "config": {} },
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "action_trigger_function_call": "#/components/schemas/FunctionCallActionTrigger",
+                "action_trigger_phrase_based": "#/components/schemas/PhraseBasedActionTrigger"
+              }
+            }
+          }
         },
         "type": "object",
         "required": ["id", "user_id", "type"],
@@ -2592,7 +3067,22 @@
             "enum": ["action_end_conversation"],
             "title": "Type"
           },
-          "config": { "$ref": "#/components/schemas/EmptyActionConfig" }
+          "config": { "$ref": "#/components/schemas/EmptyActionConfig" },
+          "action_trigger": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/FunctionCallActionTrigger" },
+              { "$ref": "#/components/schemas/PhraseBasedActionTrigger" }
+            ],
+            "title": "Action Trigger",
+            "default": { "type": "action_trigger_function_call", "config": {} },
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "action_trigger_function_call": "#/components/schemas/FunctionCallActionTrigger",
+                "action_trigger_phrase_based": "#/components/schemas/PhraseBasedActionTrigger"
+              }
+            }
+          }
         },
         "type": "object",
         "required": ["type"],
@@ -2611,6 +3101,19 @@
               { "$ref": "#/components/schemas/Undefined" }
             ],
             "title": "Config"
+          },
+          "action_trigger": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  { "$ref": "#/components/schemas/FunctionCallActionTrigger" },
+                  { "$ref": "#/components/schemas/PhraseBasedActionTrigger" }
+                ]
+              },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Action Trigger",
+            "default": {}
           }
         },
         "type": "object",
@@ -2624,12 +3127,149 @@
           "event_action",
           "event_phone_call_connected",
           "event_phone_call_ended",
+          "event_phone_call_did_not_connect",
           "event_transcript",
           "event_recording",
           "event_human_detection"
         ],
         "title": "EventType",
         "description": "An enumeration."
+      },
+      "ExternalAction": {
+        "properties": {
+          "id": { "type": "string", "format": "uuid", "title": "Id" },
+          "user_id": { "type": "string", "format": "uuid", "title": "User Id" },
+          "type": {
+            "type": "string",
+            "enum": ["action_external"],
+            "title": "Type"
+          },
+          "config": { "$ref": "#/components/schemas/ExternalActionConfig" },
+          "action_trigger": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/FunctionCallActionTrigger" },
+              { "$ref": "#/components/schemas/PhraseBasedActionTrigger" }
+            ],
+            "title": "Action Trigger",
+            "default": { "type": "action_trigger_function_call", "config": {} },
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "action_trigger_function_call": "#/components/schemas/FunctionCallActionTrigger",
+                "action_trigger_phrase_based": "#/components/schemas/PhraseBasedActionTrigger"
+              }
+            }
+          }
+        },
+        "type": "object",
+        "required": ["id", "user_id", "type", "config"],
+        "title": "ExternalAction"
+      },
+      "ExternalActionConfig": {
+        "properties": {
+          "processing_mode": {
+            "type": "string",
+            "enum": ["muted"],
+            "title": "Processing Mode",
+            "default": "muted"
+          },
+          "name": { "type": "string", "title": "Name" },
+          "description": { "type": "string", "title": "Description" },
+          "url": { "type": "string", "title": "Url" },
+          "input_schema": { "type": "object", "title": "Input Schema" },
+          "speak_on_send": { "type": "boolean", "title": "Speak On Send" },
+          "speak_on_receive": { "type": "boolean", "title": "Speak On Receive" }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "url",
+          "input_schema",
+          "speak_on_send",
+          "speak_on_receive"
+        ],
+        "title": "ExternalActionConfig"
+      },
+      "ExternalActionParams": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["action_external"],
+            "title": "Type"
+          },
+          "config": { "$ref": "#/components/schemas/ExternalActionConfig" },
+          "action_trigger": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/FunctionCallActionTrigger" },
+              { "$ref": "#/components/schemas/PhraseBasedActionTrigger" }
+            ],
+            "title": "Action Trigger",
+            "default": { "type": "action_trigger_function_call", "config": {} },
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "action_trigger_function_call": "#/components/schemas/FunctionCallActionTrigger",
+                "action_trigger_phrase_based": "#/components/schemas/PhraseBasedActionTrigger"
+              }
+            }
+          }
+        },
+        "type": "object",
+        "required": ["type", "config"],
+        "title": "ExternalActionParams"
+      },
+      "ExternalActionUpdateParams": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["action_external"],
+            "title": "Type"
+          },
+          "config": {
+            "anyOf": [
+              { "$ref": "#/components/schemas/ExternalActionConfig" },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Config"
+          },
+          "action_trigger": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  { "$ref": "#/components/schemas/FunctionCallActionTrigger" },
+                  { "$ref": "#/components/schemas/PhraseBasedActionTrigger" }
+                ]
+              },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Action Trigger",
+            "default": {}
+          }
+        },
+        "type": "object",
+        "required": ["type"],
+        "title": "ExternalActionUpdateParams"
+      },
+      "FunctionCallActionTrigger": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["action_trigger_function_call"],
+            "title": "Type"
+          },
+          "config": {
+            "$ref": "#/components/schemas/FunctionCallActionTriggerConfig"
+          }
+        },
+        "type": "object",
+        "required": ["type"],
+        "title": "FunctionCallActionTrigger"
+      },
+      "FunctionCallActionTriggerConfig": {
+        "properties": {},
+        "type": "object",
+        "title": "FunctionCallActionTriggerConfig"
       },
       "HTTPMethod": {
         "type": "string",
@@ -2694,6 +3334,7 @@
         "properties": {
           "id": { "type": "string", "format": "uuid", "title": "Id" },
           "user_id": { "type": "string", "format": "uuid", "title": "User Id" },
+          "name": { "type": "string", "title": "Name" },
           "prompt": {
             "anyOf": [
               { "type": "string", "format": "uuid" },
@@ -2772,6 +3413,11 @@
             "type": "boolean",
             "title": "Run Do Not Call Detection",
             "default": false
+          },
+          "llm_temperature": {
+            "type": "number",
+            "title": "Llm Temperature",
+            "default": 0.0
           }
         },
         "type": "object",
@@ -2803,6 +3449,28 @@
             "title": "Do Not Call Result"
           },
           "telephony_id": { "type": "string", "title": "Telephony Id" },
+          "stage": {
+            "type": "string",
+            "enum": [
+              "created",
+              "picked_up",
+              "transfer_started",
+              "transfer_successful"
+            ],
+            "title": "Stage"
+          },
+          "stage_outcome": {
+            "type": "string",
+            "enum": [
+              "human_unanswered",
+              "call_did_not_connect",
+              "human_disconnected",
+              "bot_disconnected",
+              "transfer_unanswered",
+              "transfer_disconnected"
+            ],
+            "title": "Stage Outcome"
+          },
           "to_number": { "type": "string", "title": "To Number" },
           "from_number": { "type": "string", "title": "From Number" },
           "agent": { "type": "string", "format": "uuid", "title": "Agent" },
@@ -2850,6 +3518,11 @@
               { "$ref": "#/components/schemas/TwilioAccountConnection" }
             ],
             "title": "Telephony Account Connection"
+          },
+          "telephony_params": {
+            "additionalProperties": { "type": "string" },
+            "type": "object",
+            "title": "Telephony Params"
           }
         },
         "type": "object",
@@ -3027,6 +3700,49 @@
         "required": ["items", "page", "size", "has_more"],
         "title": "PhoneNumberPage"
       },
+      "PhraseBasedActionTrigger": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["action_trigger_phrase_based"],
+            "title": "Type"
+          },
+          "config": {
+            "$ref": "#/components/schemas/PhraseBasedActionTriggerConfig"
+          }
+        },
+        "type": "object",
+        "required": ["type", "config"],
+        "title": "PhraseBasedActionTrigger"
+      },
+      "PhraseBasedActionTriggerConfig": {
+        "properties": {
+          "phrase_triggers": {
+            "items": { "$ref": "#/components/schemas/PhraseTrigger" },
+            "type": "array",
+            "title": "Phrase Triggers"
+          }
+        },
+        "type": "object",
+        "required": ["phrase_triggers"],
+        "title": "PhraseBasedActionTriggerConfig"
+      },
+      "PhraseTrigger": {
+        "properties": {
+          "phrase": { "type": "string", "title": "Phrase" },
+          "conditions": {
+            "items": {
+              "type": "string",
+              "enum": ["phrase_condition_type_contains"]
+            },
+            "type": "array",
+            "title": "Conditions"
+          }
+        },
+        "type": "object",
+        "required": ["phrase", "conditions"],
+        "title": "PhraseTrigger"
+      },
       "PineconeVectorDatabase": {
         "properties": {
           "id": { "type": "string", "format": "uuid", "title": "Id" },
@@ -3134,7 +3850,15 @@
             "enum": ["faster", "draft", "low", "medium", "high", "premium"],
             "title": "Quality"
           },
-          "temperature": { "type": "number", "title": "Temperature" }
+          "temperature": { "type": "number", "title": "Temperature" },
+          "top_p": { "type": "number", "title": "Top P" },
+          "text_guidance": { "type": "number", "title": "Text Guidance" },
+          "voice_guidance": { "type": "number", "title": "Voice Guidance" },
+          "experimental_remove_silence": {
+            "type": "boolean",
+            "title": "Experimental Remove Silence",
+            "default": false
+          }
         },
         "type": "object",
         "required": ["id", "user_id", "type", "voice_id"],
@@ -3162,7 +3886,15 @@
             "enum": ["faster", "draft", "low", "medium", "high", "premium"],
             "title": "Quality"
           },
-          "temperature": { "type": "number", "title": "Temperature" }
+          "temperature": { "type": "number", "title": "Temperature" },
+          "top_p": { "type": "number", "title": "Top P" },
+          "text_guidance": { "type": "number", "title": "Text Guidance" },
+          "voice_guidance": { "type": "number", "title": "Voice Guidance" },
+          "experimental_remove_silence": {
+            "type": "boolean",
+            "title": "Experimental Remove Silence",
+            "default": false
+          }
         },
         "type": "object",
         "required": ["type", "voice_id"],
@@ -3226,6 +3958,34 @@
               { "$ref": "#/components/schemas/Undefined" }
             ],
             "title": "Temperature"
+          },
+          "top_p": {
+            "anyOf": [
+              { "type": "number" },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Top P"
+          },
+          "text_guidance": {
+            "anyOf": [
+              { "type": "number" },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Text Guidance"
+          },
+          "voice_guidance": {
+            "anyOf": [
+              { "type": "number" },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Voice Guidance"
+          },
+          "experimental_remove_silence": {
+            "anyOf": [
+              { "type": "boolean" },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Experimental Remove Silence"
           }
         },
         "type": "object",
@@ -3343,7 +4103,14 @@
           "user_id": { "type": "string", "format": "uuid", "title": "User Id" },
           "type": { "type": "string", "enum": ["voice_rime"], "title": "Type" },
           "speaker": { "type": "string", "title": "Speaker" },
-          "speed_alpha": { "type": "number", "title": "Speed Alpha" }
+          "speed_alpha": { "type": "number", "title": "Speed Alpha" },
+          "model_id": {
+            "anyOf": [
+              { "type": "string", "enum": ["mist", "v1"] },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Model Id"
+          }
         },
         "type": "object",
         "required": ["id", "user_id", "type", "speaker"],
@@ -3353,7 +4120,14 @@
         "properties": {
           "type": { "type": "string", "enum": ["voice_rime"], "title": "Type" },
           "speaker": { "type": "string", "title": "Speaker" },
-          "speed_alpha": { "type": "number", "title": "Speed Alpha" }
+          "speed_alpha": { "type": "number", "title": "Speed Alpha" },
+          "model_id": {
+            "anyOf": [
+              { "type": "string", "enum": ["mist", "v1"] },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Model Id"
+          }
         },
         "type": "object",
         "required": ["type", "speaker"],
@@ -3375,11 +4149,108 @@
               { "$ref": "#/components/schemas/Undefined" }
             ],
             "title": "Speed Alpha"
+          },
+          "model_id": {
+            "anyOf": [
+              { "type": "string", "enum": ["mist", "v1"] },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Model Id"
           }
         },
         "type": "object",
         "required": ["type"],
         "title": "RimeVoiceUpdateParams"
+      },
+      "SetHoldAction": {
+        "properties": {
+          "id": { "type": "string", "format": "uuid", "title": "Id" },
+          "user_id": { "type": "string", "format": "uuid", "title": "User Id" },
+          "type": {
+            "type": "string",
+            "enum": ["action_set_hold"],
+            "title": "Type"
+          },
+          "config": { "$ref": "#/components/schemas/EmptyActionConfig" },
+          "action_trigger": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/FunctionCallActionTrigger" },
+              { "$ref": "#/components/schemas/PhraseBasedActionTrigger" }
+            ],
+            "title": "Action Trigger",
+            "default": { "type": "action_trigger_function_call", "config": {} },
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "action_trigger_function_call": "#/components/schemas/FunctionCallActionTrigger",
+                "action_trigger_phrase_based": "#/components/schemas/PhraseBasedActionTrigger"
+              }
+            }
+          }
+        },
+        "type": "object",
+        "required": ["id", "user_id", "type"],
+        "title": "SetHoldAction"
+      },
+      "SetHoldActionParams": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["action_set_hold"],
+            "title": "Type"
+          },
+          "config": { "$ref": "#/components/schemas/EmptyActionConfig" },
+          "action_trigger": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/FunctionCallActionTrigger" },
+              { "$ref": "#/components/schemas/PhraseBasedActionTrigger" }
+            ],
+            "title": "Action Trigger",
+            "default": { "type": "action_trigger_function_call", "config": {} },
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "action_trigger_function_call": "#/components/schemas/FunctionCallActionTrigger",
+                "action_trigger_phrase_based": "#/components/schemas/PhraseBasedActionTrigger"
+              }
+            }
+          }
+        },
+        "type": "object",
+        "required": ["type"],
+        "title": "SetHoldActionParams"
+      },
+      "SetHoldActionUpdateParams": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["action_set_hold"],
+            "title": "Type"
+          },
+          "config": {
+            "anyOf": [
+              { "$ref": "#/components/schemas/EmptyActionConfig" },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Config"
+          },
+          "action_trigger": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  { "$ref": "#/components/schemas/FunctionCallActionTrigger" },
+                  { "$ref": "#/components/schemas/PhraseBasedActionTrigger" }
+                ]
+              },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Action Trigger",
+            "default": {}
+          }
+        },
+        "type": "object",
+        "required": ["type"],
+        "title": "SetHoldActionUpdateParams"
       },
       "TransferCallAction": {
         "properties": {
@@ -3390,7 +4261,22 @@
             "enum": ["action_transfer_call"],
             "title": "Type"
           },
-          "config": { "$ref": "#/components/schemas/TransferCallConfig" }
+          "config": { "$ref": "#/components/schemas/TransferCallConfig" },
+          "action_trigger": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/FunctionCallActionTrigger" },
+              { "$ref": "#/components/schemas/PhraseBasedActionTrigger" }
+            ],
+            "title": "Action Trigger",
+            "default": { "type": "action_trigger_function_call", "config": {} },
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "action_trigger_function_call": "#/components/schemas/FunctionCallActionTrigger",
+                "action_trigger_phrase_based": "#/components/schemas/PhraseBasedActionTrigger"
+              }
+            }
+          }
         },
         "type": "object",
         "required": ["id", "user_id", "type", "config"],
@@ -3403,7 +4289,22 @@
             "enum": ["action_transfer_call"],
             "title": "Type"
           },
-          "config": { "$ref": "#/components/schemas/TransferCallConfig" }
+          "config": { "$ref": "#/components/schemas/TransferCallConfig" },
+          "action_trigger": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/FunctionCallActionTrigger" },
+              { "$ref": "#/components/schemas/PhraseBasedActionTrigger" }
+            ],
+            "title": "Action Trigger",
+            "default": { "type": "action_trigger_function_call", "config": {} },
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "action_trigger_function_call": "#/components/schemas/FunctionCallActionTrigger",
+                "action_trigger_phrase_based": "#/components/schemas/PhraseBasedActionTrigger"
+              }
+            }
+          }
         },
         "type": "object",
         "required": ["type", "config"],
@@ -3422,6 +4323,19 @@
               { "$ref": "#/components/schemas/Undefined" }
             ],
             "title": "Config"
+          },
+          "action_trigger": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  { "$ref": "#/components/schemas/FunctionCallActionTrigger" },
+                  { "$ref": "#/components/schemas/PhraseBasedActionTrigger" }
+                ]
+              },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Action Trigger",
+            "default": {}
           }
         },
         "type": "object",
@@ -3445,6 +4359,16 @@
             "type": "string",
             "enum": ["account_connection_twilio"],
             "title": "Type"
+          },
+          "steering_pool": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Steering Pool"
+          },
+          "account_supports_any_caller_id": {
+            "type": "boolean",
+            "title": "Account Supports Any Caller Id",
+            "default": false
           }
         },
         "type": "object",
@@ -3458,6 +4382,16 @@
             "type": "string",
             "enum": ["account_connection_twilio"],
             "title": "Type"
+          },
+          "steering_pool": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Steering Pool"
+          },
+          "account_supports_any_caller_id": {
+            "type": "boolean",
+            "title": "Account Supports Any Caller Id",
+            "default": false
           }
         },
         "type": "object",
@@ -3512,6 +4446,16 @@
               { "$ref": "#/components/schemas/Undefined" }
             ],
             "title": "Outbound Only"
+          },
+          "example_context": {
+            "anyOf": [
+              {
+                "additionalProperties": { "type": "string" },
+                "type": "object"
+              },
+              { "$ref": "#/components/schemas/Undefined" }
+            ],
+            "title": "Example Context"
           },
           "label": {
             "anyOf": [
