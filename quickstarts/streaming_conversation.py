@@ -1,3 +1,4 @@
+import sentry_sdk
 import asyncio
 import signal
 
@@ -17,6 +18,14 @@ from vocode.streaming.streaming_conversation import StreamingConversation
 from vocode.streaming.synthesizer.azure_synthesizer import AzureSynthesizer
 from vocode.streaming.transcriber.deepgram_transcriber import DeepgramTranscriber
 
+from sentry_sdk.integrations.asyncio import AsyncioIntegration
+from sentry_sdk.integrations.loguru import LoguruIntegration
+from vocode import sentry_transaction
+
+import sentry_sdk
+
+from loguru import logger
+
 configure_pretty_logging()
 
 
@@ -29,8 +38,9 @@ class Settings(BaseSettings):
     openai_api_key: str = "ENTER_YOUR_OPENAI_API_KEY_HERE"
     azure_speech_key: str = "ENTER_YOUR_AZURE_KEY_HERE"
     deepgram_api_key: str = "ENTER_YOUR_DEEPGRAM_API_KEY_HERE"
-
+    sentry_dsn: str = ""
     azure_speech_region: str = "eastus"
+    environment: str = "development"
 
     # This means a .env file can be used to overload these settings
     # ex: "OPENAI_API_KEY=my_key" will set openai_api_key over the default above
@@ -42,6 +52,20 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+sentry_sdk.init(
+    dsn=settings.sentry_dsn,
+    environment=settings.environment,
+    # Sample rate for transactions (performance).
+    traces_sample_rate=1.0,
+    # Sample rate for exceptions / crashes.
+    sample_rate=1.0,
+    max_request_body_size="always",
+    integrations=[
+        AsyncioIntegration(),
+        LoguruIntegration(),
+    ],
+)
 
 
 async def main():
@@ -75,7 +99,7 @@ async def main():
         ),
     )
     await conversation.start()
-    print("Conversation started, press Ctrl+C to end")
+    logger.info("Conversation started, press Ctrl+C to end")
     signal.signal(signal.SIGINT, lambda _0, _1: asyncio.create_task(conversation.terminate()))
     while conversation.is_active():
         chunk = await microphone_input.get_audio()
@@ -83,4 +107,9 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    with sentry_sdk.start_transaction(
+        op="streaming_conversation", description="streaming_conversation"
+    ) as sentry_txn:
+        # division_by_zero = 1 / 0
+        sentry_transaction.set(sentry_txn)
+        asyncio.run(main())
