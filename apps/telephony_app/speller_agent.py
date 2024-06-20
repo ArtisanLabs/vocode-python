@@ -1,15 +1,16 @@
-import logging
 from typing import Optional, Tuple
-import typing
+
+from vocode.streaming.agent.abstract_factory import AbstractAgentFactory
+from vocode.streaming.agent.base_agent import BaseAgent, RespondAgent
 from vocode.streaming.agent.chat_gpt_agent import ChatGPTAgent
 from vocode.streaming.models.agent import AgentConfig, AgentType, ChatGPTAgentConfig
-from vocode.streaming.agent.base_agent import BaseAgent, RespondAgent
-from vocode.streaming.agent.factory import AgentFactory
 
 
 class SpellerAgentConfig(AgentConfig, type="agent_speller"):
     """Configuration for SpellerAgent. Inherits from AgentConfig."""
+
     pass
+
 
 class SpellerAgent(RespondAgent[SpellerAgentConfig]):
     """SpellerAgent class. Inherits from RespondAgent.
@@ -47,18 +48,14 @@ class SpellerAgent(RespondAgent[SpellerAgentConfig]):
         return "".join(c + " " for c in human_input), False
 
 
-
-class SpellerAgentFactory(AgentFactory):
+class SpellerAgentFactory(AbstractAgentFactory):
     """Factory class for creating agents based on the provided agent configuration."""
 
-    def create_agent(
-        self, agent_config: AgentConfig, logger: Optional[logging.Logger] = None
-    ) -> BaseAgent:
+    def create_agent(self, agent_config: AgentConfig) -> BaseAgent:
         """Creates an agent based on the provided agent configuration.
 
         Args:
             agent_config (AgentConfig): The configuration for the agent to be created.
-            logger (Optional[logging.Logger]): The logger to be used by the agent.
 
         Returns:
             BaseAgent: The created agent.
@@ -67,16 +64,10 @@ class SpellerAgentFactory(AgentFactory):
             Exception: If the agent configuration type is not recognized.
         """
         # If the agent configuration type is CHAT_GPT, create a ChatGPTAgent.
-        if agent_config.type == AgentType.CHAT_GPT:
-            return ChatGPTAgent(
-                # Cast the agent configuration to ChatGPTAgentConfig as we are sure about the type here.
-                agent_config=typing.cast(ChatGPTAgentConfig, agent_config)
-            )
+        if isinstance(agent_config, ChatGPTAgentConfig):
+            return ChatGPTAgent(agent_config=agent_config)
         # If the agent configuration type is agent_speller, create a SpellerAgent.
-        elif agent_config.type == "agent_speller":
-            return SpellerAgent(
-                # Cast the agent configuration to SpellerAgentConfig as we are sure about the type here.
-                agent_config=typing.cast(SpellerAgentConfig, agent_config)
-            )
+        elif isinstance(agent_config, SpellerAgentConfig):
+            return SpellerAgent(agent_config=agent_config)
         # If the agent configuration type is not recognized, raise an exception.
         raise Exception("Invalid agent config")

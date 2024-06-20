@@ -6,10 +6,10 @@ authors = ["Your Name <you@example.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.12"
-python-dotenv = "^1.0.0"
-vocode = "0.1.111"
-elevenlabs = "^0.2.23"
+python = ">=3.11,<3.12"
+python-dotenv = "^1.0.1"
+vocode = "0.1.113"
+elevenlabs = "^1.2.2"
 
 
 [build-system]

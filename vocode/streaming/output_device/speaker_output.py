@@ -1,10 +1,13 @@
 import queue
 from typing import Optional
-import sounddevice as sd
+
 import numpy as np
+import sounddevice as sd
 
 from .base_output_device import BaseOutputDevice
-from vocode.streaming.models.audio_encoding import AudioEncoding
+from vocode.streaming.models.audio import AudioEncoding
+
+raise DeprecationWarning("Use BlockingSpeakerOutput instead")
 
 
 class SpeakerOutput(BaseOutputDevice):
