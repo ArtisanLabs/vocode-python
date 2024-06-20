@@ -132,3 +132,18 @@ line_length = 100
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+# Pixi configuration
+[project]
+name = "vocode"
+requires-python = ">=3.11"
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[tool.pixi.dependencies]
+poetry = ">=1.8.3,<1.9"
+openssl = "3.0.*"
+ffmpeg = ">=7.0.1,<7.1"
+portaudio = ">=19.6.0,<19.7"
